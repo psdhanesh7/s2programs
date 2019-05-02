@@ -63,10 +63,41 @@ void replace(char string[],int sublen,char rsub[],char rstring[],int index[],int
 }
 void main()
 {
-	char string[max],substring[max],rsub[max],rstring[max];
-	int index[max],ilen,i;
-	printf("Enter a string:");
+	char string[max],substring[max],rsub[max],rstring[max],a[max][max],pc='\0',ch;
+	int index[max],ilen,i=0,p1=0,l,k,j=0,wcount=0;
+		printf("Enter a string:");
 	scanf(" %[^\n]",string);
+	while(string[i]!='\0')
+	{
+		
+		ch=string[i];
+		if((ch==' ' ||ch=='\t' || ch=='\n')&&pc!=' '&&pc!='\t' && pc!='\n')
+		{
+			l=0;
+			for(k=p1;k<i;k++)
+				a[j][l++]=string[k];
+			a[j][l]='\0';
+			j++;
+			if(string[i+1]!=' '||string[i+1]!='\t'||string[i+1]!='\n')
+				p1=i+1;
+			
+			wcount++;
+			
+		}
+		pc=string[i];
+		i++;
+	}
+	if(pc!=' '&&pc!='\t' && pc!='\n')
+	{	l=0;
+		for(k=p1;k<i;k++)
+				a[j][l++]=string[k];
+			a[j][l]='\0';
+		wcount++;
+			
+	}
+	for(i=0;i<wcount;i++)
+		if(palindrome(a[i]))
+			printf("%s is a palindrome\n",a[i]);
 	printf("Number of vowels in the string are :\t%d",vcount(string));
 	printf("\nNumber of digits in the string are:\t%d",ncount(string));
 	printf("\nEnter the substring to be searched:");
